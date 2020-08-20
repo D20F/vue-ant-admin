@@ -1,17 +1,29 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import { constantRouterMap } from '@/config/router.config'
+import VueRouter from 'vue-router'
+// import store from '../store/index'
 
-// hack router push callback
-const originalPush = Router.prototype.push
-Router.prototype.push = function push (location, onResolve, onReject) {
-  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
-  return originalPush.call(this, location).catch(err => err)
-}
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-export default new Router({
-  mode: 'history',
-  routes: constantRouterMap
+const routes = [
+  {
+    path:"/",
+    name:"main",
+    explain:"主页面",
+    component:() => import("@/view/Home/index.vue")
+  },
+]
+
+const router = new VueRouter({
+  // mode: 'history',
+  base: __dirname,
+  routes
 })
+
+router.beforeEach((to, from, next) => {
+  // console.log('to',to);
+  // console.log('from',from);
+  next()
+})
+
+export default router
