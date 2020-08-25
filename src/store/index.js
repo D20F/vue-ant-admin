@@ -1,16 +1,32 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-Vue.use(Vuex);
 
-import SYSTEM from './system'
-import PUBLIC from './public'
+import app from './modules/app'
+import user from './modules/user'
 
+// default router permission control
+import permission from './modules/permission'
 
-const store = new Vuex.Store({
+// dynamic router permission control (Experimental)
+// import permission from './modules/async-router'
+import getters from './getters'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
   modules: {
-    system: SYSTEM,
-    public: PUBLIC
-  }
-})
+    app,
+    user,
+    permission
+  },
+  state: {
 
-export default  store
+  },
+  mutations: {
+
+  },
+  actions: {
+
+  },
+  getters
+})
