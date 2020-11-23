@@ -116,8 +116,7 @@ const vueConfig = {
   // disable source map in production
   productionSourceMap: false,
 
-  lintOnSave: undefined, 
-//   lintOnSave: false,// 设置false 关闭eslist检测 
+  lintOnSave: false, // 设置false 关闭eslist检测 
   // babel-loader no-ignore node_modules/*
   transpileDependencies: []
 }

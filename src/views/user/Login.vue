@@ -138,7 +138,7 @@ import { getSmsCaptcha, get2step } from '@/api/login'
 
 export default {
     components: {
-        TwoStepCaptcha
+        TwoStepCaptcha,
     },
     data() {
         return {
@@ -168,6 +168,7 @@ export default {
                 this.requiredTwoStepCaptcha = false
             })
         // this.requiredTwoStepCaptcha = true
+        console.log(this.$store)
     },
     methods: {
         ...mapActions(['Login', 'Logout']),
@@ -195,7 +196,7 @@ export default {
                 Login,
             } = this
             state.loginBtn = true
-            
+
             const validateFieldsKey = customActiveKey === 'tab1' ? ['username', 'password'] : ['mobile', 'captcha']
 
             validateFields(validateFieldsKey, { force: true }, (err, values) => {
@@ -204,7 +205,7 @@ export default {
                     const loginParams = { ...values }
                     delete loginParams.username
                     loginParams[!state.loginType ? 'email' : 'username'] = values.username
-                    loginParams.password = md5(values.password)                    
+                    loginParams.password = md5(values.password)
                     Login(loginParams)
                         .then((res) => this.loginSuccess(res))
                         .catch((err) => this.requestFailed(err))
