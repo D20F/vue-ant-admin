@@ -1,28 +1,36 @@
 <template>
-  <a-config-provider :locale="locale">
     <div id="app">
-      <router-view/>
+        <router-view />
     </div>
-  </a-config-provider>
 </template>
 
 <script>
-import { domTitle, setDocumentTitle } from '@/utils/domUtil'
-import { i18nRender } from '@/locales'
-
 export default {
-  data () {
-    return {
-    }
-  },
-  computed: {
-    locale () {
-      // 只是为了切换语言时，更新标题
-      const { title } = this.$route.meta
-      title && (setDocumentTitle(`${i18nRender(title)} - ${domTitle}`))
-
-      return this.$i18n.getLocaleMessage(this.$store.getters.lang).antLocale
-    }
-  }
-}
+    name: "App",
+    components: {},
+};
 </script>
+
+<style lang="scss">
+@import "@/style/public.scss";
+
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    height: 100%;
+}
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+</style>
