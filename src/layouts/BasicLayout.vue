@@ -11,12 +11,7 @@
     :i18nRender="i18nRender"
     v-bind="settings"
   >
-    <!-- Ads begin
-      广告代码 真实项目中请移除
-      production remove this Ads
-    -->
-    <ads v-if="isProPreviewSite && !collapsed"/>
-    <!-- Ads end -->
+
 
     <setting-drawer :settings="settings" @change="handleSettingChange" />
     <template v-slot:rightContentRender>
@@ -38,7 +33,6 @@ import { CONTENT_WIDTH_TYPE, SIDEBAR_TYPE, TOGGLE_MOBILE_TYPE } from '@/store/mu
 import defaultSettings from '@/config/defaultSettings'
 import RightContent from '@/components/GlobalHeader/RightContent'
 import GlobalFooter from '@/components/GlobalFooter'
-import Ads from '@/components/Other/CarbonAds'
 import LogoSvg from '../assets/logo.svg?inline'
 
 export default {
@@ -47,13 +41,10 @@ export default {
     SettingDrawer,
     RightContent,
     GlobalFooter,
-    Ads
   },
   data () {
     return {
-      // preview.pro.antdv.com only use.
-      isProPreviewSite: process.env.VUE_APP_PREVIEW === 'true' && process.env.NODE_ENV !== 'development',
-      // end
+
 
       // base
       menus: [],
