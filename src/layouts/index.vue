@@ -5,16 +5,7 @@
         </a-layout-sider>
         <a-layout>
             <a-layout-content>
-                <a-layout-header
-                    style="
-                        background: #fff;
-                        padding: 20px;
-                        height: 20px;
-                        width: 2220px;
-                    "
-                >
-                </a-layout-header>
-
+                <headers />
                 <a-breadcrumb :style="{ margin: '16px 0' }">
                     <a-breadcrumb-item>Home</a-breadcrumb-item>
                     <a-breadcrumb-item>List</a-breadcrumb-item>
@@ -30,7 +21,7 @@
 <script>
 import content from "./content";
 import sider from "./sider";
-import header from "./header";
+import headers from "./header";
 export default {
     data() {
         return {
@@ -40,7 +31,7 @@ export default {
     components: {
         content,
         sider,
-        header,
+        headers,
     },
 };
 </script>

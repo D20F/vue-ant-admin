@@ -9,6 +9,7 @@
             :default-selected-keys="['1']"
             :default-open-keys="['sub1']"
             style="height: 100%"
+            :multiple="false"
         >
             <a-sub-menu key="sub1">
                 <span slot="title"><a-icon type="user" />subnav 1</span>
