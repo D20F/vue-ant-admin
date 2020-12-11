@@ -1,16 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-Vue.use(Vuex);
+import getters from './getters'
+import app from './modules/app'
+import settings from './modules/settings'
+import user from './modules/user'
 
-import PUKE from './poker'
-import PUBLIC from './public'
-
+Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules: {
-    poker: PUKE,
-    public: PUBLIC
-  }
+    app,
+    settings,
+    user
+  },
+  getters
 })
 
-export default  store
+export default store
