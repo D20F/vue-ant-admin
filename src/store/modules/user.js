@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/user'
+import { login, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
@@ -28,14 +28,13 @@ const mutations = {
 }
 
 const actions = {
-  // user login
+  // 登陆
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
+      login({ username: username.trim(), password: password }).then(res => {
+        commit('SET_TOKEN', res.token)
+        setToken(res.token)
         resolve()
       }).catch(error => {
         reject(error)
@@ -43,42 +42,36 @@ const actions = {
     })
   },
 
-  // get user info
+  // 获取账号信息  同时肩负判断token是否过期
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
-        const { data } = response
-
-        if (!data) {
+      getInfo(state.token).then(res => {
+        if (!res) {
           return reject('Verification failed, please Login again.')
         }
 
-        const { name, avatar } = data
+        const { name, avatar } = res
 
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
-        resolve(data)
+        resolve(res)
       }).catch(error => {
         reject(error)
       })
     })
   },
 
-  // user logout
+  // 账号登出
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
         removeToken() // must remove  token  first
         resetRouter()
         commit('RESET_STATE')
         resolve()
-      }).catch(error => {
-        reject(error)
-      })
     })
   },
 
-  // remove token
+  // 清除 token
   resetToken({ commit }) {
     return new Promise(resolve => {
       removeToken() // must remove  token  first

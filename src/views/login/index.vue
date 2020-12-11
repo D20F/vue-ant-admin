@@ -19,7 +19,7 @@
                 <el-input
                     ref="username"
                     v-model="loginForm.username"
-                    placeholder="Username"
+                    placeholder="账号名"
                     name="username"
                     type="text"
                     tabindex="1"
@@ -36,7 +36,7 @@
                     ref="password"
                     v-model="loginForm.password"
                     :type="passwordType"
-                    placeholder="Password"
+                    placeholder="密码"
                     name="password"
                     tabindex="2"
                     auto-complete="on"
@@ -63,13 +63,12 @@
 </template>
 
 <script>
-import { validUsername } from "@/utils/validate";
 
 export default {
     name: "Login",
     data() {
         const validateUsername = (rule, value, callback) => {
-            if (!validUsername(value)) {
+            if (0) {
                 callback(new Error("账号名错误"));
             } else {
                 callback();
@@ -86,8 +85,8 @@ export default {
         };
         return {
             loginForm: {
-                username: "admin",
-                password: "111111",
+                username: "",
+                password: "",
             },
             loginRules: {
                 username: [
@@ -181,12 +180,12 @@ $cursor: #fff;
             padding: 12px 5px 12px 15px;
             color: $bg;
             height: 47px;
-            caret-color: $cursor;
+            caret-color: $bg;
 
-            &:-webkit-autofill {
-                box-shadow: 0 0 0px 1000px $bg inset !important;
-                -webkit-text-fill-color: $cursor !important;
-            }
+            // &:-webkit-autofill {
+            //     box-shadow: 0 0 0px 1000px #ffffff inset !important;
+            //     -webkit-text-fill-color: $cursor !important;
+            // }
         }
     }
 
