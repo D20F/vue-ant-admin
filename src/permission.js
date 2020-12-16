@@ -18,7 +18,6 @@ router.beforeEach(async(to, from, next) => {
   // 获取token 确认状态
   const hasToken = getToken()
 
-
   if (hasToken) {
     // 登陆之后不允许进入 login 页
     if (to.path === '/login') {

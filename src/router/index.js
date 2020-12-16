@@ -37,7 +37,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '仪表盘', icon: 'dashboard' }
     }]
   },
 
@@ -48,6 +48,24 @@ export const constantRoutes = [
     name: 'Example',
     meta: { title: 'Example', icon: 'el-icon-s-help' },
     children: [
+      {
+        path: 'excelExport',
+        name: 'ExcelExport',
+        component: () => import('@/views/example/excel-export/index'),
+        meta: { title: 'excel表格导出', icon: 'table' }
+      },
+      {
+        path: 'excelImport',
+        name: 'ExcelImport',
+        component: () => import('@/views/example/excel-import/index'),
+        meta: { title: 'excel表格导入', icon: 'table' }
+      },
+      {
+        path: 'tableForm',
+        name: 'tableForm',
+        component: () => import('@/views/example/table-form/index'),
+        meta: { title: 'table of from', icon: 'table' }
+      },
       {
         path: 'table',
         name: 'Table',
