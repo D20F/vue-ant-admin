@@ -15,7 +15,7 @@ export default {
     methods: {
     },
     created() {
-        console.log(this.$store.state.user.avatar)
+        
     },
 };
 </script>

@@ -1,12 +1,15 @@
 import { login, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
+import { ALL } from '@/router/routerConfig'
 
 const getDefaultState = () => {
   return {
     token: getToken(),
     name: '',
-    avatar: ''
+    avatar: '',
+    routerOption: [], //router 路由
+
   }
 }
 
@@ -24,6 +27,9 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+  },
+  CHANGE_ROUTER: (state, value) => {
+    state.routerOption = value
   }
 }
 
@@ -49,6 +55,20 @@ const actions = {
         if (!res) {
           return reject('Verification failed, please Login again.')
         }
+
+        // 获取权限路由
+        let data = [];
+        const { permissions } = res
+
+        if(permissions.module.length !== 0){
+            for (let i of permissions.module) {
+                data = data.concat(ALL[i])
+            }
+        }
+        data = data.concat(ALL[permissions.role])
+        
+        commit('CHANGE_ROUTER', data)
+
 
         const { name, avatar } = res
         commit('SET_NAME', name)

@@ -24,20 +24,22 @@ import { mapGetters } from 'vuex'
 import Logo from './Logo'
 import SidebarItem from './SidebarItem'
 import variables from '@/styles/variables.scss'
+import { basis } from '@/router/routerConfig'
 
 export default {
   components: { SidebarItem, Logo },
   computed: {
     ...mapGetters([
-      'sidebar'
+      'sidebar',
+      'routerOption',
     ]),
     routes() {
-      return this.$router.options.routes
+      return [...basis , ...this.routerOption]
     },
     activeMenu() {
       const route = this.$route
       const { meta, path } = route
-      // if set path, the sidebar will highlight the path you set
+      // 如果设置路径，侧边栏将突出显示你设置的路径
       if (meta.activeMenu) {
         return meta.activeMenu
       }

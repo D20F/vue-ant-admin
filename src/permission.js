@@ -6,6 +6,9 @@ import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
 
+
+
+
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login'] // no redirect whitelist
@@ -29,8 +32,11 @@ router.beforeEach(async(to, from, next) => {
         next()
       } else {
         try {
-          // 获取用户信息
+          // 获取用户信息 以及权限
           await store.dispatch('user/getInfo')
+          // 添加路由
+          router.addRoutes(store.getters.routerOption)
+          
           next()
         } catch (error) {
           // 删除缓存信息 重定向login
