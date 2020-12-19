@@ -71,6 +71,12 @@ export const example = [
                 meta: { title: '文件上传', icon: 'table' }
             },
             {
+                path: 'textFormat',
+                name: 'textFormat',
+                component: () => import('@/views/example/textFormat/index'),
+                meta: { title: '富文本', icon: 'table' }
+            },
+            {
                 path: 'table',
                 name: 'Table',
                 component: () => import('@/views/table/index'),
