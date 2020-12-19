@@ -4,6 +4,7 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import Viser from 'viser-vue'
 
 import '@/styles/index.scss' // 公共 css
 
@@ -17,6 +18,7 @@ import '@/permission' // 路由控制
 import '@/directive/button-permissions'
 
 Vue.use(ElementUI)
+Vue.use(Viser)
 
 Vue.config.productionTip = false
 

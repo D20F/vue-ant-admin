@@ -37,7 +37,7 @@ router.beforeEach(async(to, from, next) => {
           // 添加路由
           router.addRoutes(store.getters.routerOption)
           
-          next()
+          next({ ...to, replace: true })
         } catch (error) {
           // 删除缓存信息 重定向login
           await store.dispatch('user/resetToken')

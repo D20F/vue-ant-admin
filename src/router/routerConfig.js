@@ -32,9 +32,12 @@ export const basis = [
             component: () => import('@/views/dashboard/index'),
             meta: { title: '仪表盘', icon: 'dashboard' }
         }]
-    },
-    { path: '*', redirect: '/404', hidden: true }
+    }
+]
 
+// 报错模块 放在异步路由里,解决刷新404问题
+export const err = [
+    { path: '*', redirect: '/404', hidden: true }
 ]
 
 // 通用模块
@@ -75,6 +78,12 @@ export const example = [
                 name: 'textFormat',
                 component: () => import('@/views/example/textFormat/index'),
                 meta: { title: '富文本', icon: 'table' }
+            },
+            {
+                path: 'chart',
+                name: 'chart',
+                component: () => import('@/views/example/chart/index'),
+                meta: { title: '图表', icon: 'table' }
             },
             {
                 path: 'table',
@@ -186,10 +195,10 @@ export const link = [
 
 
 // root 账户
-export const root = [...example,...form,...nested,...link]
+export const root = [...err,...example,...form,...nested,...link]
 
 // 运营商
-export const operator = [...form,...nested]
+export const operator = [...err,...form,...nested]
 
 
 // 全部暴露
