@@ -77,7 +77,7 @@ export default {
       if (before) {
        
        
-            //  文件 blob  文件名 blobName 
+            //     创建文件对象     文件rawFile   文件名 rawFile.name 
             let blobFile = new File([rawFile], rawFile.name)
             let fromData = new FormData()
             // 文件对象给拍进去
