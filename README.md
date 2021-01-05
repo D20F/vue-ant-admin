@@ -4,6 +4,7 @@
 
 图表
 
+vuetify
 
 ## 数字滚动库
 vue-countTo
