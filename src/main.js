@@ -15,14 +15,13 @@ import router from './router'
 import '@/icons' // 图标
 import '@/permission' // 路由控制
 
-import '@/directive/button-permissions'
 
 Vue.use(ElementUI)
 Vue.use(Viser)
 
 Vue.config.productionTip = false
 
-
+import '@/directive/index'  // 全局指令
 
 new Vue({
   el: '#app',

@@ -109,6 +109,12 @@ export const component = [
         meta: { title: '组件', icon: 'el-icon-s-help' },
         children: [
             {
+                path: 'directive',
+                name: 'directive',
+                component: () => import('@/views/component/directive/index'),
+                meta: { title: '指令', icon: 'table' }
+            },
+            {
                 path: 'login',
                 name: 'login',
                 component: () => import('@/views/component/login/index'),
