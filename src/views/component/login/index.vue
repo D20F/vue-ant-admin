@@ -1,9 +1,6 @@
 <template>
     <div class="dashboard">
 
-        <!-- <input type="text" placeholder="" v-regular="['val',/^1([3|4|5|7|8|])\d{9}$/]" v-model="val" /> -->
-        <input type="text" placeholder="" v-regular="['val',/a/]" v-model="val" />
-      
     </div>
 </template>
 

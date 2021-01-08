@@ -6,7 +6,7 @@ Vue.directive('copy-select', {
         el.handler = () => {
             let execCommand = document.execCommand('copy');
             if (execCommand) {
-                showTip_span(el, '复制成功', 'center', 1500)
+                showTip_div(el, '复制成功', 'bottom', 1000)
             }
         }
 
@@ -36,7 +36,7 @@ Vue.directive('copy-click', {
             document.body.removeChild(input);
 
             if (execCommand) {
-                showTip_span(el, '复制成功', 'center', 1500)
+                showTip_div(el, '复制成功', 'center', 1500)
 
             }
         }

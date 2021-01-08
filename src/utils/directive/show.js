@@ -35,10 +35,11 @@ export let showTip_div = (el, data, direction, time) => {
                 transform: translate(-50%, -50%);
                 `,
     }
-
-    el.insertAdjacentHTML(
-        'beforeend',
-        `<div 
+    // 防止多次添加dom
+    if (!document.getElementById('copy-tip')) {
+        el.insertAdjacentHTML(
+            'beforeend',
+            `<div 
             id = "copy-tip" 
             style="        
             opacity: 0;
@@ -59,22 +60,23 @@ export let showTip_div = (el, data, direction, time) => {
             <p> 
             ${data}
             </p >
-        <div />`
-    )
-    let tip = document.getElementById('copy-tip')
-    setTimeout(() => {
-        tip.style.opacity = 1;
-    }, 0);
-    setTimeout(() => {
-        tip.style.opacity = 0;
-    }, time);
-    setTimeout(() => {
-        tip.remove();
-    }, time * 2);
+            <div />`
+        )
+        let tip = document.getElementById('copy-tip')
+        setTimeout(() => {
+            tip.style.opacity = 1;
+        }, 0);
+        setTimeout(() => {
+            tip.style.opacity = 0;
+        }, time);
+        setTimeout(() => {
+            tip.remove();
+        }, time * 2);
+    }
 }
 
 
-/** 强制定位 tip
+/** 强制定位 tip  未完成
  * showTip
  * @param {*} el            根dom元素
  * @param {*} data          显示值
