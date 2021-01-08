@@ -1,18 +1,18 @@
 <template>
   <div>
     <v-chart :force-fit="true" :height="height" renderer="svg">
-      <v-tooltip :on-show="onTooltipShow" :on-hide="onTooltipHide" :on-change="onTooltipChange"></v-tooltip>
-      <v-axis></v-axis>
-      <v-legend></v-legend>
+      <v-tooltip :on-show="onTooltipShow" :on-hide="onTooltipHide" :on-change="onTooltipChange" />
+      <v-axis />
+      <v-legend />
       <v-view :data="data" :scale="scale" :filter="filter">
-        <v-stack-bar :position="'year*percent'" :color="'country'" :v-style="stackBarStyle"></v-stack-bar>
+        <v-stack-bar :position="'year*percent'" :color="'country'" :v-style="stackBarStyle" />
       </v-view>
     </v-chart>
   </div>
 </template>
 
 <script>
- const data = [
+const data = [
   { country: 'Europe', year: '1750', value: 163 },
   { country: 'Europe', year: '1800', value: 203 },
   { country: 'Europe', year: '1850', value: 276 },
@@ -29,15 +29,15 @@
   { country: 'Asia', year: '1999', value: 3634 },
   { country: 'Asia', year: '2050', value: 5268 },
   { country: 'Asia', year: '2100', value: 7268 }
-];
- const scale = [{
+]
+const scale = [{
   dataKey: 'percent',
   min: 0,
-  formatter: '.2%',
-}];
-const DataSet = require('@antv/data-set');
-const ds = new DataSet();
-const dv = ds.createView().source(data);
+  formatter: '.2%'
+}]
+const DataSet = require('@antv/data-set')
+const ds = new DataSet()
+const dv = ds.createView().source(data)
 
 dv.transform({
   type: 'percent',
@@ -45,17 +45,17 @@ dv.transform({
   dimension: 'country',
   groupBy: ['year'],
   as: 'percent'
-});
+})
 
 const filter = [{
   dataKey: 'country',
   callback: (ev) => {
-    return ev === 'Europe';
+    return ev === 'Europe'
   }
-}];
+}]
 
 export default {
-    name:'chart',
+  name: 'Chart',
   data() {
     return {
       data: dv.rows,
@@ -74,11 +74,11 @@ export default {
       },
       onTooltipChange: () => {
         // console.log('change');
-      },
-    };
+      }
+    }
   },
   methods: {
 
   }
-};
+}
 </script>

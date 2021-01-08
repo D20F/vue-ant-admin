@@ -2,20 +2,23 @@
     <div class="box">
         <div class="topbar">
             <div class="left">
-                <slot name="title"></slot>
+                <slot name="title" />
             </div>
-            <div class="right"><p>选项</p></div>
+            <div class="right">
+                <p>选项</p>
+                <v-icon> mdi-content-copy </v-icon>
+            </div>
         </div>
         <div class="content">
             <div class="left">
-                <slot name="content"></slot>
+                <slot name="content" />
             </div>
             <div class="right">
-                <slot name="select"></slot>
+                <slot name="select" />
             </div>
         </div>
         <div class="tabbar">
-            <slot name="code"></slot>
+            <slot name="code" />
         </div>
     </div>
 </template>
@@ -23,15 +26,15 @@
 <script>
 export default {
     name: "CodeShow",
-    computed: {},
     props: {
         title: {
             type: String,
             default: "",
         },
     },
-    methods: {},
+    computed: {},
     created() {},
+    methods: {},
 };
 </script>
 

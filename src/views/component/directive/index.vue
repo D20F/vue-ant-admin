@@ -13,37 +13,44 @@
                 <p>指令</p>
             </template>
             <template v-slot:code>
-                <p></p>
+                <div>
+                    <!-- {{text}} -->
+                </div>
             </template>
         </CodeShow>
 
+    <pre>
+        <code class="language-javascript" >
+            console.log(1111)
+        </code>
+    </pre>
     </div>
 </template>
 
 <script>
 import CodeShow from "@/components/CodeShow";
+import '@/utils/prism/prism'
 
 export default {
-    name: "directive",
-    data() {
-        return {
-            text: 'v-copy-select',
-        };
-    },
+    name: "Directive",
     components: {
         CodeShow,
     },
-    computed: {},
-    methods: {
-        add(){
-            
-        }
+    data() {
+        return {
+            text: ''
+        };
     },
+    computed: {},
     created() {},
+    methods: {
+        add() {},
+    },
 };
 </script>
 
 <style lang="scss" scoped>
+
 .dashboard {
     &-container {
         margin: 30px;
@@ -53,6 +60,4 @@ export default {
         line-height: 46px;
     }
 }
-
-
 </style>

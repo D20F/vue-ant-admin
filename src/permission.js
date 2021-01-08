@@ -6,15 +6,11 @@ import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
 
-
-
-
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login'] // no redirect whitelist
 
 router.beforeEach(async(to, from, next) => {
-
   NProgress.start()
   document.title = getPageTitle(to.meta.title)
 
@@ -36,7 +32,7 @@ router.beforeEach(async(to, from, next) => {
           await store.dispatch('user/getInfo')
           // 添加路由
           router.addRoutes(store.getters.routerOption)
-          
+
           next({ ...to, replace: true })
         } catch (error) {
           // 删除缓存信息 重定向login
@@ -48,7 +44,7 @@ router.beforeEach(async(to, from, next) => {
       }
     }
   } else {
-    // 无token重定向  
+    // 无token重定向
     // login 路径不用重定向
     if (whiteList.indexOf(to.path) !== -1) {
       next()

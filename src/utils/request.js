@@ -3,11 +3,11 @@ import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
-let URL = 'http://127.0.0.1:7001';
+const URL = 'http://127.0.0.1:7001'
 const service = axios.create({
-  baseURL: URL, 
+  baseURL: URL,
   // withCredentials: true, // send cookies when cross-domain requests
-  timeout: 5000 
+  timeout: 5000
 })
 
 service.interceptors.request.use(

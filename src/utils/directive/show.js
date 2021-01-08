@@ -6,40 +6,40 @@ import Vue from 'vue'
  * @param {*} data          显示值
  * @param {*} direction     方向
  */
-export let showTip_div = (el, data, direction, time) => {
-    // console.log(el, data, direction, time)
-    let css = {
-        top: `
+export const showTip_div = (el, data, direction, time) => {
+  // console.log(el, data, direction, time)
+  const css = {
+    top: `
                 top: 0%;
                 left: 50%;
                 transform: translate(0%, -50%);
                 `,
-        bottom: `
+    bottom: `
                 top: 100%;
                 left: 50%;
                 transform: translate(-50%, 0%);
                 `,
-        left: `
+    left: `
                 top: 50%;
                 left: 0%;
                 transform: translate(0%, -50%);
                 `,
-        right: `
+    right: `
                 top: 50%;
                 left: 100%;
                 transform: translate(-50%, 0%);
                 `,
-        center: `
+    center: `
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                `,
-    }
-    // 防止多次添加dom
-    if (!document.getElementById('copy-tip')) {
-        el.insertAdjacentHTML(
-            'beforeend',
-            `<div 
+                `
+  }
+  // 防止多次添加dom
+  if (!document.getElementById('copy-tip')) {
+    el.insertAdjacentHTML(
+      'beforeend',
+      `<div 
             id = "copy-tip" 
             style="        
             opacity: 0;
@@ -61,20 +61,19 @@ export let showTip_div = (el, data, direction, time) => {
             ${data}
             </p >
             <div />`
-        )
-        let tip = document.getElementById('copy-tip')
-        setTimeout(() => {
-            tip.style.opacity = 1;
-        }, 0);
-        setTimeout(() => {
-            tip.style.opacity = 0;
-        }, time);
-        setTimeout(() => {
-            tip.remove();
-        }, time * 2);
-    }
+    )
+    const tip = document.getElementById('copy-tip')
+    setTimeout(() => {
+      tip.style.opacity = 1
+    }, 0)
+    setTimeout(() => {
+      tip.style.opacity = 0
+    }, time)
+    setTimeout(() => {
+      tip.remove()
+    }, time * 2)
+  }
 }
-
 
 /** 强制定位 tip  未完成
  * showTip
@@ -83,38 +82,38 @@ export let showTip_div = (el, data, direction, time) => {
  * @param {*} direction     方向
  * @param {*} time          时间
  */
-export let showTip_span = (el, data, direction, time) => {
-    let css = {
-        top: `
+export const showTip_span = (el, data, direction, time) => {
+  const css = {
+    top: `
                 top: 0%;
                 left: 50%;
                 transform: translate(0%, -50%);
                 `,
-        bottom: `
+    bottom: `
                 top: 100%;
                 left: 50%;
                 transform: translate(-50%, 0%);
                 `,
-        left: `
+    left: `
                 top: 50%;
                 left: 0%;
                 transform: translate(0%, -50%);
                 `,
-        right: `
+    right: `
                 top: 50%;
                 left: 100%;
                 transform: translate(-50%, 0%);
                 `,
-        center: `
+    center: `
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                `,
-    }
+                `
+  }
 
-    el.insertAdjacentHTML(
-        'beforeend',
-        `<span
+  el.insertAdjacentHTML(
+    'beforeend',
+    `<span
             id = "copy-tip" 
             style="        
             opacity: 0;
@@ -133,15 +132,15 @@ export let showTip_span = (el, data, direction, time) => {
             ">
             ${data}
         <span />`
-    )
-    let tip = document.getElementById('copy-tip')
-    setTimeout(() => {
-        tip.style.opacity = 1;
-    }, 0);
-    setTimeout(() => {
-        tip.style.opacity = 0;
-    }, time);
-    setTimeout(() => {
-        tip.remove();
-    }, time * 2);
+  )
+  const tip = document.getElementById('copy-tip')
+  setTimeout(() => {
+    tip.style.opacity = 1
+  }, 0)
+  setTimeout(() => {
+    tip.style.opacity = 0
+  }, time)
+  setTimeout(() => {
+    tip.remove()
+  }, time * 2)
 }

@@ -69,24 +69,24 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-    //   getList().then(response => {
-        // this.list = response.data.items
-        this.list = [{
-            id: '@id',
-            title: '@sentence(10, 20)',
-            status: ['published', 'draft', 'deleted'],
-            author: 'name',
-            display_time: '@datetime',
-            pageviews: '@integer(300, 5000)'
-        },{
-            id: '@id',
-            title: '@sentence(10, 20)',
-            status: ['published', 'draft', 'deleted'],
-            author: 'name',
-            display_time: '@datetime',
-            pageviews: '@integer(300, 5000)'
-        }]
-        this.listLoading = false
+      //   getList().then(response => {
+      // this.list = response.data.items
+      this.list = [{
+        id: '@id',
+        title: '@sentence(10, 20)',
+        status: ['published', 'draft', 'deleted'],
+        author: 'name',
+        display_time: '@datetime',
+        pageviews: '@integer(300, 5000)'
+      }, {
+        id: '@id',
+        title: '@sentence(10, 20)',
+        status: ['published', 'draft', 'deleted'],
+        author: 'name',
+        display_time: '@datetime',
+        pageviews: '@integer(300, 5000)'
+      }]
+      this.listLoading = false
     //   })
     }
   }

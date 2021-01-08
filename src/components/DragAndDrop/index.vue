@@ -16,7 +16,7 @@ import axios from 'axios'
 
 export default {
   props: {
-    fileType: { //文件类型 默认为空  逗号分割 .xlsx, .xls
+    fileType: { // 文件类型 默认为空  逗号分割 .xlsx, .xls
       type: String,
       default: ''
     },
@@ -64,7 +64,7 @@ export default {
       const files = e.target.files
       const rawFile = files[0] // only use files[0]
 
-      console.log( e.target.files)
+      console.log(e.target.files)
 
       if (!rawFile) return
       this.upload(rawFile)
@@ -72,28 +72,23 @@ export default {
     upload(rawFile) {
       this.$refs['excel-upload-input'].value = null // fix can't select the same excel
 
-
       const before = this.beforeUpload(rawFile)
       if (before) {
-       
-       
-            //     创建文件对象     文件rawFile   文件名 rawFile.name 
-            let blobFile = new File([rawFile], rawFile.name)
-            let fromData = new FormData()
-            // 文件对象给拍进去
-            fromData.append("file", blobFile);
-            // 可以定一些后端需要的数据带进去
-            fromData.append("fileName", 'ccc');
+        //     创建文件对象     文件rawFile   文件名 rawFile.name
+        const blobFile = new File([rawFile], rawFile.name)
+        const fromData = new FormData()
+        // 文件对象给拍进去
+        fromData.append('file', blobFile)
+        // 可以定一些后端需要的数据带进去
+        fromData.append('fileName', 'ccc')
 
-            axios.post("http://127.0.0.1:7001/upload", fromData).then(res => {
-                console.log(res)
-            }).catch((err) => {
-                console.log(err)
-            })
-
+        axios.post('http://127.0.0.1:7001/upload', fromData).then(res => {
+          console.log(res)
+        }).catch((err) => {
+          console.log(err)
+        })
       }
-    },
-
+    }
 
   }
 }

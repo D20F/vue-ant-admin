@@ -31,10 +31,10 @@ export default {
   computed: {
     ...mapGetters([
       'sidebar',
-      'routerOption',
+      'routerOption'
     ]),
     routes() {
-      return [...basis , ...this.routerOption]
+      return [...basis, ...this.routerOption]
     },
     activeMenu() {
       const route = this.$route

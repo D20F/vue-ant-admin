@@ -8,7 +8,7 @@ const getDefaultState = () => {
     token: getToken(),
     name: '',
     avatar: '',
-    routerOption: [], //router 路由
+    routerOption: [] // router 路由
 
   }
 }
@@ -57,18 +57,17 @@ const actions = {
         }
 
         // 获取权限路由
-        let data = [];
+        let data = []
         const { permissions } = res
 
-        if(permissions.module.length !== 0){
-            for (let i of permissions.module) {
-                data = data.concat(ALL[i])
-            }
+        if (permissions.module.length !== 0) {
+          for (const i of permissions.module) {
+            data = data.concat(ALL[i])
+          }
         }
         data = data.concat(ALL[permissions.role])
-        
-        commit('CHANGE_ROUTER', data)
 
+        commit('CHANGE_ROUTER', data)
 
         const { name, avatar } = res
         commit('SET_NAME', name)
@@ -83,10 +82,10 @@ const actions = {
   // 账号登出
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-        removeToken() // must remove  token  first
-        resetRouter()
-        commit('RESET_STATE')
-        resolve()
+      removeToken() // must remove  token  first
+      resetRouter()
+      commit('RESET_STATE')
+      resolve()
     })
   },
 
