@@ -18,10 +18,19 @@
             </div>
         </div>
         <div class="tabbar">
+            <v-icon v-hover-tip="['22121sa']"> mdi-content-copy </v-icon>
+            <v-icon > mdi-arrow-top-right-bottom-left </v-icon>
+
+
+
+
             <slot name="code" />
         </div>
     </div>
 </template>
+
+
+
 
 <script>
 export default {
@@ -116,5 +125,6 @@ export default {
     border-left: 1px solid #e0e0e0;
     border-right: 1px solid #e0e0e0;
     border-bottom: 1px solid #e0e0e0;
+    
 }
 </style>

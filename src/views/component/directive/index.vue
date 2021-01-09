@@ -2,7 +2,7 @@
     <div class="outer-layer-percentage">
         <CodeShow>
             <template v-slot:title>
-                <p>自定义指令</p>
+                <p  >自定义指令</p>
             </template>
             <template v-slot:content>
                 <div>
@@ -14,31 +14,40 @@
             </template>
             <template v-slot:code>
                 <div>
-                    <!-- {{text}} -->
+                    <pre>
+                        <code class="language-javascript " >
+                            Vue.directive('copy-select', {
+                                bind: function(el, binding, vnode) {
+                                    el.handler = () => {
+                                        const execCommand = document.execCommand('copy')
+                                        if (execCommand) {
+                                            showTip_div(el, '复制成功', 'bottom', 1000)
+                                        }
+                                    }
+                                    el.addEventListener('mouseup', el.handler)
+                                },
+                                unbind: function(el, binding, vnode) {
+                                    el.removeEventListener('mouseup', el.handler)
+                                },
+                            })
+                        </code>
+                    </pre>
                 </div>
             </template>
         </CodeShow>
-
-    <pre>
-        <code class="language-javascript" >
-            console.log(1111)
-        </code>
-    </pre>
     </div>
 </template>
 
 <script>
-import CodeShow from "@/components/CodeShow";
-import '@/utils/prism/prism'
+import prism from "@/mixins/prism";
 
 export default {
     name: "Directive",
-    components: {
-        CodeShow,
-    },
+    components: {},
+    mixins: [prism],
     data() {
         return {
-            text: ''
+            text: "",
         };
     },
     computed: {},
@@ -50,7 +59,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .dashboard {
     &-container {
         margin: 30px;
