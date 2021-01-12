@@ -6,7 +6,14 @@
             </div>
             <div class="right">
                 <p>选项</p>
-                <v-icon> mdi-content-copy </v-icon>
+                <div style="display: flex">
+                    <div @click="copy" v-hover-tip="['复制代码']">
+                        <v-icon> mdi-content-copy </v-icon>
+                    </div>
+                    <div @click="unfold" v-hover-tip="['查看源代码']">
+                        <v-icon> mdi-arrow-top-right-bottom-left </v-icon>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="content">
@@ -17,13 +24,7 @@
                 <slot name="select" />
             </div>
         </div>
-        <div class="tabbar">
-            <v-icon v-hover-tip="['22121sa']"> mdi-content-copy </v-icon>
-            <v-icon > mdi-arrow-top-right-bottom-left </v-icon>
-
-
-
-
+        <div class="tabbar" :style="{ height: tabbar_height + 'px' }">
             <slot name="code" />
         </div>
     </div>
@@ -35,15 +36,33 @@
 <script>
 export default {
     name: "CodeShow",
-    props: {
-        title: {
-            type: String,
-            default: "",
-        },
+    props: {},
+    data() {
+        return {
+            tabbar_height: "30",
+            max_height: "",
+        };
     },
     computed: {},
-    created() {},
-    methods: {},
+    created() {
+        this.$nextTick(() => {
+            this.max_height = document.querySelector(".tabbar").firstElementChild.clientHeight;
+        });
+    },
+    methods: {
+        copy() {
+            this.$emit("copy");
+            // 使用虚拟dom获取内容来复制内容
+            console.log(this.$slots)
+        },
+        unfold() {
+            if(this.tabbar_height == '30'){
+                this.tabbar_height = this.max_height + 48
+            }else {
+                this.tabbar_height = '30'
+            }
+        },
+    },
 };
 </script>
 
@@ -81,12 +100,16 @@ export default {
     }
     .right {
         display: flex;
-        justify-content: left;
-        padding: 0 10px;
         align-items: center;
+        justify-content: space-between;
+        padding: 0 10px;
         width: 30%;
         height: 100%;
         p {
+            justify-content: left;
+        }
+        div {
+            justify-content: right;
         }
     }
 }
@@ -120,11 +143,12 @@ export default {
     background: #fafafa;
     padding: 10px 10px;
     width: 100%;
-    min-height: 50px;
+    overflow: hidden;
     border-radius: 0 0 4px 4px;
     border-left: 1px solid #e0e0e0;
     border-right: 1px solid #e0e0e0;
     border-bottom: 1px solid #e0e0e0;
-    
+
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.6, 1);
 }
 </style>

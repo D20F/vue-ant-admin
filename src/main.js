@@ -17,8 +17,6 @@ import '@/permission' // 路由控制
 import '@/components/index' // 全局注册组件
 
 
-
-
 Vue.use(ElementUI)
 Vue.use(Viser)
 

@@ -19,7 +19,6 @@ var _self = (typeof window !== 'undefined')
  * @public
  */
 var Prism = (function (_self){
-console.log('zxz')
 // Private helper vars
 var lang = /\blang(?:uage)?-([\w-]+)\b/i;
 var uniqueId = 0;

@@ -1,38 +1,23 @@
 <template>
     <div class="outer-layer-percentage">
-        <CodeShow>
+        <CodeShow v-for="(item, index) of doc" :key="index">
             <template v-slot:title>
-                <p  >自定义指令</p>
+                <p>{{ item.title }}</p>
             </template>
             <template v-slot:content>
                 <div>
-                    <p v-copy-select>选中复制</p>
+                    <component :is="item.name"></component>
                 </div>
             </template>
             <template v-slot:select>
-                <p>指令</p>
+                {{ item.select }}
             </template>
             <template v-slot:code>
-                <div>
-                    <pre>
-                        <code class="language-javascript " >
-                            Vue.directive('copy-select', {
-                                bind: function(el, binding, vnode) {
-                                    el.handler = () => {
-                                        const execCommand = document.execCommand('copy')
-                                        if (execCommand) {
-                                            showTip_div(el, '复制成功', 'bottom', 1000)
-                                        }
-                                    }
-                                    el.addEventListener('mouseup', el.handler)
-                                },
-                                unbind: function(el, binding, vnode) {
-                                    el.removeEventListener('mouseup', el.handler)
-                                },
-                            })
-                        </code>
-                    </pre>
-                </div>
+                <pre>
+                    <code class="language-javascript " >
+                        {{item.code}}
+                    </code>
+                </pre>
             </template>
         </CodeShow>
     </div>
@@ -41,20 +26,20 @@
 <script>
 import prism from "@/mixins/prism";
 
+import code from "./code";
+
 export default {
     name: "Directive",
-    components: {},
+    components: code,
     mixins: [prism],
     data() {
         return {
-            text: "",
+            doc: code,
         };
     },
     computed: {},
     created() {},
-    methods: {
-        add() {},
-    },
+    methods: {},
 };
 </script>
 
