@@ -3,6 +3,7 @@
         <div class="topbar">
             <div class="left">
                 <slot name="title" />
+                <p>{{ list.title }}</p>
             </div>
             <div class="right">
                 <p>选项</p>
@@ -24,8 +25,24 @@
                 <slot name="select" />
             </div>
         </div>
-        <div class="tabbar" :style="{ height: tabbar_height + 'px' }">
-            <slot name="code" />
+        <div
+            class="tabbar"
+            :class="code_class"
+            :style="{ height: tabbar_height + 'px' }"
+        >
+            <!-- <slot name="code" /> -->
+            <div>
+                <pre>
+                <code class="language-javascript " >
+                    {{list.js}}
+                </code>
+            </pre>
+                <pre v-if="list.style">
+                <code class="language-css " >
+                    {{list.style}}
+                </code>
+            </pre>
+            </div>
         </div>
     </div>
 </template>
@@ -34,32 +51,51 @@
 
 
 <script>
+import { random, select, selectCopy } from "@/utils/tool/index";
 export default {
     name: "CodeShow",
-    props: {},
+    props: {
+        list: {
+            type: Object,
+            default: () => {
+                return {
+                    render: "",
+                    select: "",
+                    name: "",
+                    js: "",
+                    style: "",
+                    title: "",
+                };
+            },
+        },
+    },
     data() {
         return {
             tabbar_height: "30",
             max_height: "",
+            code_class: "",
         };
     },
     computed: {},
-    created() {
+    mounted() {
+        this.code_class = random(8);
         this.$nextTick(() => {
-            this.max_height = document.querySelector(".tabbar").firstElementChild.clientHeight;
+            this.max_height = document.querySelector(
+                "." + this.code_class
+            ).firstElementChild.clientHeight;
         });
     },
+    created() {},
     methods: {
         copy() {
-            this.$emit("copy");
-            // 使用虚拟dom获取内容来复制内容
-            console.log(this.$slots)
+            let dom = document.querySelector('.' + this.code_class)
+            selectCopy(dom)
         },
         unfold() {
-            if(this.tabbar_height == '30'){
-                this.tabbar_height = this.max_height + 48
-            }else {
-                this.tabbar_height = '30'
+            if (this.tabbar_height == "30") {
+                this.tabbar_height = this.max_height + 48;
+            } else {
+                this.tabbar_height = "30";
             }
         },
     },
@@ -69,8 +105,8 @@ export default {
 <style lang="scss" scoped>
 .box {
     width: 80%;
-    min-height: 300px;
-    margin: 0 auto;
+    min-height: 190px;
+    margin: 0 auto 20px auto;
     position: relative;
     div {
         position: relative;

@@ -1,23 +1,10 @@
 <template>
     <div class="outer-layer-percentage">
-        <CodeShow v-for="(item, index) of doc" :key="index">
-            <template v-slot:title>
-                <p>{{ item.title }}</p>
-            </template>
+        <CodeShow v-for="(item, index) of doc" :key="index" :list="item">
             <template v-slot:content>
                 <div>
                     <component :is="item.name"></component>
                 </div>
-            </template>
-            <template v-slot:select>
-                {{ item.select }}
-            </template>
-            <template v-slot:code>
-                <pre>
-                    <code class="language-javascript " >
-                        {{item.code}}
-                    </code>
-                </pre>
             </template>
         </CodeShow>
     </div>

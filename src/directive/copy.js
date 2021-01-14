@@ -1,23 +1,20 @@
 import Vue from 'vue'
 import { showTip_div } from '@/utils/directive/show'
+
 // 选中复制
 Vue.directive('copy-select', {
-  bind: function(el, binding, vnode) {
-    el.handler = () => {
-      const execCommand = document.execCommand('copy')
-      if (execCommand) {
-        showTip_div(el, '复制成功', 'bottom', 1000)
-      }
+    bind: function(el, binding, vnode) {
+        el.handler = () => {
+            const execCommand = document.execCommand('copy')
+            if (execCommand) {
+                showTip_div(el, '复制成功', 'bottom', 1000)
+            }
     }
-
     el.addEventListener('mouseup', el.handler)
   },
   unbind: function(el, binding, vnode) {
     el.removeEventListener('mouseup', el.handler)
   },
-  inserted: function(el, binding, vnode) {},
-  update: function(el, binding, vnode) {},
-  componentUpdated: function(el, binding, vnode) {}
 })
 
 // 点击传值复制
@@ -44,8 +41,5 @@ Vue.directive('copy-click', {
   unbind: function(el, binding, vnode) {
     el.removeEventListener('click', el.handler)
   },
-  inserted: function(el, binding, vnode) {},
-  update: function(el, binding, vnode) {},
-  componentUpdated: function(el, binding, vnode) {}
 })
 
