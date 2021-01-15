@@ -104,9 +104,9 @@ export default {
 
 <style lang="scss" scoped>
 .box {
-    width: 80%;
+    width: 60%;
     min-height: 190px;
-    margin: 0 auto 20px auto;
+    margin: 0 0 20px 10%;
     position: relative;
     div {
         position: relative;

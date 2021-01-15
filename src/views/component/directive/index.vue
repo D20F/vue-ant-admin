@@ -17,7 +17,20 @@ import code from "./code";
 
 export default {
     name: "Directive",
-    components: code,
+    components: {
+        copySelect: () => {
+            return import("./component/copySelect");
+        },
+        copyClick: () => {
+            return import("./component/copyClick");
+        },
+        debouncePromise: () => {
+            return import("./component/debouncePromise");
+        },
+        debounceTiming: () => {
+            return import("./component/debounceTiming");
+        },
+    },
     mixins: [prism],
     data() {
         return {
@@ -26,6 +39,13 @@ export default {
     },
     computed: {},
     created() {},
+    mounted() {
+        // const returnEle = document.querySelector("#productId"); //productId是将要跳转区域的id
+        // if (!!returnEle) {
+        //     returnEle.scrollIntoView(true); // true 是默认的
+        // }
+        // document.querySelector("counter1").scrollIntoView(true);
+    },
     methods: {},
 };
 </script>

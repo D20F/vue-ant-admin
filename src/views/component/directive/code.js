@@ -2,8 +2,8 @@ const compiler = require("vue-template-compiler");
 
 
 
-export default {
-    copySelect: {
+export default [
+    {
         js: `Vue.directive('copy-select', {
                 bind: function(el, binding, vnode) {
                     el.handler = () => {
@@ -30,9 +30,8 @@ export default {
         name: "copySelect",
         title: "选中复制",
         select: "",
-        render: compiler.compileToFunctions("<p v-copy-select>选中复制</p>").render,
     },
-    copyClick: {
+    {
         js: `
             Vue.directive('copy-click', {
                 bind: function(el, binding, vnode) {            
@@ -59,7 +58,71 @@ export default {
         name: "copyClick",
         title: "点击复制",
         select: "",
-        render: compiler.compileToFunctions(`<p v-copy-click="'点击复制'">点击复制</p>`).render,
-    }
-}
+    },
+    {
+        js: `
+            // promise 防抖 指令必须绑定一个promise对象
+            Vue.directive('debounce-promise', {
+                bind: function (el, binding, vnode) {
+                    el.handler = () => {
+                        if (!run) {
+                            return
+                        }
+                        run = false
+                        binding.value().then((val) => {
+                            run = true
+                        }).catch((err) => {
+                            run = true
+                        })
+                    }
+                    let run = true
+                    el.addEventListener('click', el.handler)
+                },
+                unbind: function (el, binding, vnode) {
+                    el.removeEventListener('click', el.handler)
+                },
+            })
+            `,
+        style: "",
+        name: "debouncePromise",
+        title: "promise 防抖",
+        select: "",
+    },
+    {
+        js: `
+            // 时间防抖   默认 2秒
+            Vue.directive('debounce-timing', {
+                bind: function (el, binding, vnode) {
+                    let time
+                    let run = true
+                    if (binding.expression) {
+                        time = binding.expression
+                    } else {
+                        time = 2000
+                    }
+                    el.handler = () => {
+                        if (!run) {
+                            return
+                        }
+                        run = false
+                        // 阻止点击事件
+                        el.style.pointerEvents = 'none'
+                        setTimeout(() => {
+                            el.style.pointerEvents = 'auto'
+                            run = true
+                        }, time)
+                    }
+                    el.addEventListener('click', el.handler)
+                },
+                unbind: function (el, binding, vnode) {
+                    el.removeEventListener('click', el.handler)
+                },
+            })
+            `,
+        style: "",
+        name: "debounceTiming",
+        title: "时间防抖",
+        select: "",
+    },
+]
 
