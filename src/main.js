@@ -23,12 +23,10 @@ Vue.use(Viser)
 Vue.config.productionTip = false
 
 import '@/directive/index' // 全局指令
-import vuetify from './plugins/vuetify'
 
 new Vue({
   el: '#app',
   store,
   router,
-  vuetify,
   render: h => h(App)
 })

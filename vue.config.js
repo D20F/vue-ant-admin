@@ -28,13 +28,19 @@ module.exports = {
         'overlay': {
             'warnings': false,
             'errors': true
-        }
+        },
+        proxy: {  //配置反向代理
+            '/': {
+                changOrigin: true,
+                target: 'http://192.168.2.222:8075',
+            },
+        },
     },
     'configureWebpack': {
         'name': '管理后台',
         'resolve': {
             'alias': {
-                '@': 'C:\\Users\\Administrator\\Desktop\\test\\vue-ant-admin\\src'
+                '@': resolve('src')
             }
         }
     },
@@ -111,6 +117,5 @@ module.exports = {
             )
     },
     'transpileDependencies': [
-        'vuetify'
     ]
 }

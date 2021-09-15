@@ -1,108 +1,111 @@
-import { login, getInfo } from '@/api/user'
+import { login,adminUserInfoOwn } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
-import { ALL } from '@/router/routerConfig'
+import { root } from '@/router/routerConfig'
 
 const getDefaultState = () => {
-  return {
-    token: getToken(),
-    name: '',
-    avatar: '',
-    routerOption: [] // router 路由
+    return {
+        token: getToken('admin_token'),
+        userId: getToken('userId'),
+        name: '',
+        avatar: '',
+        routerOption: [] // router 路由
 
-  }
+    }
 }
 
 const state = getDefaultState()
 
 const mutations = {
-  RESET_STATE: (state) => {
-    Object.assign(state, getDefaultState())
-  },
-  SET_TOKEN: (state, token) => {
-    state.token = token
-  },
-  SET_NAME: (state, name) => {
-    state.name = name
-  },
-  SET_AVATAR: (state, avatar) => {
-    state.avatar = avatar
-  },
-  CHANGE_ROUTER: (state, value) => {
-    state.routerOption = value
-  }
+    RESET_STATE: (state) => {
+        Object.assign(state, getDefaultState())
+    },
+    SET_TOKEN: (state, data) => {
+        state.token = data
+    },
+    SET_USERID: (state, data) => {
+        state.userId = data
+    },
+    SET_NAME: (state, data) => {
+        state.name = data
+    },
+    SET_AVATAR: (state, data) => {
+        state.avatar = data
+    },
+    CHANGE_ROUTER: (state, data) => {
+        state.routerOption = data
+    }
 }
 
 const actions = {
-  // 登陆
-  login({ commit }, userInfo) {
-    const { username, password } = userInfo
-    return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(res => {
-        commit('SET_TOKEN', res.token)
-        setToken(res.token)
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
-    })
-  },
+    // 登陆
+    login({ commit }, userInfo) {
+        const { username, password } = userInfo
+        return new Promise((resolve, reject) => {
+            login({ username: username.trim(), password: password }).then(res => {
+                console.log('login',res)
+                commit('SET_TOKEN', res.token.accessToken)
+                setToken('admin_token', res.token.accessToken)
+                commit('SET_USERID', res.token.userId)
+                setToken('userId', res.token.userId)
 
-  // 获取账号信息  同时肩负判断token是否过期
-  getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      getInfo(state.token).then(res => {
-        if (!res) {
-          return reject('Verification failed, please Login again.')
-        }
+                resolve(res)
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    },
 
-        // 获取权限路由
-        let data = []
-        const { permissions } = res
+    // 获取账号信息  同时肩负判断token是否过期
+    getInfo({ commit, state }) {
+        return new Promise((resolve, reject) => {
+            adminUserInfoOwn().then(res => {
+                if (!res) {
+                    return reject('Verification failed, please Login again.')
+                }
+                // console.log('getInfo',res);
 
-        if (permissions.module.length !== 0) {
-          for (const i of permissions.module) {
-            data = data.concat(ALL[i])
-          }
-        }
-        data = data.concat(ALL[permissions.role])
+                // 获取权限路由
+                // let data = []
+                // const { permissions } = res
 
-        commit('CHANGE_ROUTER', data)
+                // if (permissions.module.length !== 0) {
+                //     for (const i of permissions.module) {
+                //         data = data.concat(ALL[i])
+                //     }
+                // }
+                // data = data.concat(ALL[permissions.role])
+                // commit('CHANGE_ROUTER', data)
 
-        const { name, avatar } = res
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        resolve(res)
-      }).catch(error => {
-        reject(error)
-      })
-    })
-  },
+                commit('CHANGE_ROUTER', root)
 
-  // 账号登出
-  logout({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      removeToken() // must remove  token  first
-      resetRouter()
-      commit('RESET_STATE')
-      resolve()
-    })
-  },
+                const { name } = res
+                commit('SET_NAME', name)
+                commit('SET_AVATAR', '')// 没有头像空 默认
+                resolve(res)
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    },
 
-  // 清除 token
-  resetToken({ commit }) {
-    return new Promise(resolve => {
-      removeToken() // must remove  token  first
-      commit('RESET_STATE')
-      resolve()
-    })
-  }
+    // 账号登出
+    logout({ commit, state }) {
+        return new Promise((resolve, reject) => {
+            removeToken('userId') 
+            removeToken('admin_token')
+            resetRouter()
+            commit('RESET_STATE')
+            resolve()
+        })
+    },
+
 }
 
 export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions
+    namespaced: true,
+    state,
+    mutations,
+    actions
 }
 
